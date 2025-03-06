@@ -1,3 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Custom transitions */
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --border: 214.3 31.8% 91.4%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --border: 217.2 32.6% 17.5%;
+  }
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +68,601 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.tooltip-appear {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.tooltip-appear-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+.tooltip-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.tooltip-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+
+.tooltip-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tooltip-exit-active {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+
+/* Add to your index.css or a separate CSS file */
+.tooltip-scroll {
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.tooltip-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tooltip-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tooltip-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+/* For the graph */
+.node {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.node:hover {
+  transform: scale(1.1);
+}
+
+.link {
+  transition: stroke-width 0.2s ease;
+}
+
+.link:hover {
+  stroke-width: 2px;
+}
+.tooltip-container {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip-content {
+  pointer-events: auto;
+  cursor: default;
+}
+
+.node {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.node:hover {
+  transform: scale(1.1);
+}
+
+.tooltip-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tooltip-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tooltip-container::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+/* Add to your index.css or a separate CSS file */
+.node {
+  transition: transform 200ms ease-out;
+}
+
+.node:hover {
+  cursor: pointer;
+}
+
+.link {
+  pointer-events: none;
+}
+
+.tooltip-content {
+  transition: opacity 200ms ease-out;
+}
+
+/* Custom scrollbar styles */
+.tooltip-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tooltip-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tooltip-content::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+/* For Firefox */
+.tooltip-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+/* Add to your stylesheet */
+.node {
+  transition: none !important; /* Prevent default transitions */
+}
+
+.node-shape {
+  transition: stroke-width 200ms ease, filter 200ms ease;
+  pointer-events: all;
+}
+
+.link {
+  pointer-events: none; /* Prevent links from interfering with node hover */
+}
+
+/* Optional: Add this if you want smooth position changes during simulation */
+.node {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.node-shape {
+  transition: stroke-width 200ms ease;
+}
+
+.node-selected .node-shape {
+  stroke-width: 3px;
+}
+
+.tooltip {
+  transition: opacity 200ms ease;
+}
+.mermaid {
+  background-color: white;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+@media print {
+  .mermaid svg {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+}
+
+/* Custom styles for Mermaid nodes */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node polygon,
+.mermaid .node path {
+  transition: all 0.2s ease;
+}
+
+.mermaid .node:hover rect,
+.mermaid .node:hover circle,
+.mermaid .node:hover polygon,
+.mermaid .node:hover path {
+  filter: brightness(0.95);
+}
+
+.mermaid .edgePath {
+  stroke-width: 1.5;
+  transition: stroke-width 0.2s ease;
+}
+
+.mermaid .edgePath:hover {
+  stroke-width: 2;
+}
+
+html {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: 'Roboto'
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.toolbar {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  z-index: 9999;
+}
+
+.toolbar > .button {
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.toolbar > .button:hover {
+  background-color: #cccccc;
+}
+
+.stepIcon {
+  fill: #3c9ee5;
+  font-family: 'Font Awesome 5 Pro';
+  font-size: 0.8em;
+  text-anchor: middle;
+  font-weight: 200;
+}
+
+.stepIconEnded {
+  fill: darkgray;
+  font-family: 'Font Awesome 5 Pro';
+  font-size: 0.8em;
+  text-anchor: middle;
+  font-weight: 200;
+}
+
+.stepIconPending {
+  fill: green;
+  font-family: 'Font Awesome 5 Pro';
+  font-size: 0.8em;
+  text-anchor: middle;
+  font-weight: 200;
+}
+
+.node {
+  height: 135px;
+  width: 120px;
+  box-shadow: 6px 6px 18px rgb(197, 194, 194);
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.fullnode {
+  height: 390px;
+  width: 280px;
+  box-shadow: 6px 6px 18px rgb(197, 194, 194);
+  border-radius: 15px;
+  cursor: inherit;
+}
+
+.node-container {
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  height: 100%;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.node-status {
+  text-align: center;
+  font-size: x-small;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.node-status-preparation {
+  background-color: #6D757A;
+  color: white;
+}
+
+.node-status-integration {
+  background-color: orange;
+  color: white;
+}
+
+.node-status-execution {
+  background-color: green;
+  color: white;
+}
+/* Add to your index.css or components/MermaidChart/styles.css */
+.mermaid {
+  background-color: white;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Custom styles for Mermaid nodes */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node polygon,
+.mermaid .node path {
+  transition: all 0.2s ease;
+}
+
+.mermaid .node:hover rect,
+.mermaid .node:hover circle,
+.mermaid .node:hover polygon,
+.mermaid .node:hover path {
+  filter: brightness(0.95);
+  cursor: pointer;
+}
+
+.mermaid .edgePath {
+  stroke-width: 1.5;
+  transition: stroke-width 0.2s ease;
+}
+
+.mermaid .edgePath:hover {
+  stroke-width: 2;
+}
+
+/* Print styles */
+@media print {
+  .mermaid svg {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+}
+
+#breadcrumb {
+  background-color: #e9f2f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+#breadcrumb:empty {
+  display: none;
+}
+#breadcrumb span {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 20px;
+  margin-right: 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+#breadcrumb span:last-child {
+  background-color: #2ecc71;
+}
+#breadcrumb span:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+#breadcrumb .separator {
+  color: #fbfdfd;
+  margin: 0 5px;
+  cursor: default;
+}
+.separator {
+  color: #fbfdfd;
+  margin: 0 5px;
+  cursor: default;
+}
+.workflow-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #f8fafc;
+}
+
+/* Node Styles */
+.react-flow__node {
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.02);
+    z-index: 10;
+  }
+}
+
+/* Edge Styles */
+.react-flow__edge {
+  transition: stroke-width 0.3s ease;
+}
+
+.react-flow__edge:hover {
+  stroke-width: 3px;
+}
+
+.react-flow__edge-path {
+  stroke: #94a3b8;
+  stroke-width: 2;
+}
+
+/* Edge Animation */
+@keyframes dashOffset {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.react-flow__edge-path {
+  stroke-dasharray: 5, 5;
+  animation: dashOffset 1s linear infinite;
+}
+
+/* Handle Styles */
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #2563eb;
+  border: 2px solid white;
+  transition: all 0.2s ease;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.5);
+  background-color: #1d4ed8;
+}
+
+/* Validation Node Styles */
+.validation-diamond {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform: rotate(45deg);
+  background: #eab308;
+  border: 2px solid white;
+}
+
+/* Distribution Node Styles */
+.distribution-circle {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #2563eb;
+  border: 2px solid white;
+}
+
+/* Controls and Mini-map */
+.react-flow__controls {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.react-flow__controls-button {
+  background: white;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 8px;
+  &:hover {
+    background: #f1f5f9;
+  }
+}
+
+.react-flow__minimap {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/* Zoom transitions */
+.react-flow__viewport {
+  transition: transform 0.3s ease;
+}
+
+/* Node expansion animation */
+.node-children {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.node-children.expanded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Edge markers */
+.react-flow__arrowhead {
+  fill: #94a3b8;
+}
+
+/* Background */
+.react-flow__background {
+  background-color: #f8fafc;
+}
+
+/* Add these styles to your CSS */
+.react-flow__edge-path {
+  stroke-dasharray: 5;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+@keyframes flow {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Optional: Add hover effects */
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke-width: 3;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.2));
+
+}
+
+/* Optional: Style for selected edges */
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 3;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.3));
+}
+
+
+/* Add these styles to your CSS */
+.react-flow__edge-path {
+  stroke-dasharray: 5;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.react-flow__panel.react-flow__panel--bottom-right.download-controls-button {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+  z-index: 5;
+  padding: 0;
+  margin: 0;
+  pointer-events: all;
+  font-size: 14px;
+  background: transparent;
+}
+
+/* Ensure proper stacking with other controls */
+.react-flow__controls {
+  margin-right: 80px; /* Give space for download button */
+}
+
+/* Custom positioning for Controls */
+.react-flow__panel.react-flow__panel--bottom-left {
+right: 20px;
+top: 10px;
+}
+
+.controls-button {
+background-color: white;
+border: 1px solid #eee;
+padding: 4px;
+border-radius: 4px;
+display: flex;
+flex-direction: column;
+gap: 4px;
 }
